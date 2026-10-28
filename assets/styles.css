@@ -36,9 +36,20 @@
   /* 假名详情弹窗：外层 dialog 与内层 shell 必须用同一个值，
      内层比外层小的话，圆角会被外层的裁剪区域「吃掉」一块。 */
   --dialog-radius: 30px;
-  --font-sans: "Avenir Next", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  /* 字体策略：全部使用系统字体，不引入 webfont —— 零请求、离线可用、无版权顾虑。
+     代价是各平台观感不完全一致，所以字族顺序必须严谨：
+     日文一定要排在中文前面。中文优先时假名会被渲染成中文字形变体，
+     「ソ/ン/シ/ツ」的笔画角度、「あ/い」的起收笔都与日文字形不同。 */
+  --font-sans: "Avenir Next", "Helvetica Neue", "PingFang SC", "Hiragino Sans", "Microsoft YaHei", sans-serif;
   --font-serif: "Iowan Old Style", "Baskerville", "Songti SC", "Noto Serif CJK SC", "Yu Mincho", "Hiragino Mincho ProN", serif;
-  --font-jp: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Songti SC", "Noto Serif CJK JP", serif;
+
+  /* 日文优先栈：iOS/macOS → Windows → Android/Linux → 中文兜底。 */
+  --font-jp:
+    "Hiragino Mincho ProN", "Hiragino Mincho Pro",   /* iOS / macOS 日文明朝 */
+    "Yu Mincho", "YuMincho",                         /* macOS / Windows 日文明朝 */
+    "Noto Serif JP", "Noto Serif CJK JP",            /* Android / Linux 日文 */
+    "Songti SC", "SimSun",                           /* 兜底：中文衬线 */
+    serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
   color-scheme: light;

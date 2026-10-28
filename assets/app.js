@@ -12,9 +12,21 @@
 
   const STORAGE_KEY = 'kanaGarden.v1';
   const THEME_KEY = 'kanaGarden.theme';
-  const TOTAL_CHARS = DATA.items.length * 2;
   const ALL_GROUPS = ['seion', 'dakuon', 'handakuon', 'yoon'];
   const GROUP_LABELS = { seion: '清音', dakuon: '浊音', handakuon: '半浊音', yoon: '拗音' };
+
+  /* 各类音节数一律从 DATA 推导，不要在代码里写死。
+     掌握度按「平假名 + 片假名」两种分别统计，所以总数要乘 2。 */
+  const countInGroup = (group) =>
+    DATA.items.filter((item) => Array.isArray(group) ? group.includes(item.group) : item.group === group).length;
+
+  const SCRIPT_COUNT = 2;                       // 平假名 / 片假名
+  const TOTAL_CHARS = DATA.items.length * SCRIPT_COUNT;
+  const SEION_TOTAL = countInGroup('seion');                                    // 清音
+  const VOICED_TOTAL = countInGroup(['dakuon', 'handakuon']);                   // 浊音 + 半浊音
+  const YOON_TOTAL = countInGroup('yoon');                                      // 拗音
+  const barTotal = (count) => count * SCRIPT_COUNT;                             // 进度条按两种假名合计
+
   const RING_CIRCUMFERENCE = 2 * Math.PI * 52;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -200,6 +212,8 @@
     themeToggle: $('#themeToggle'),
     themeColor: $('#themeColor'),
     navCount: $('#navCount'),
+    navTotal: $('#navTotal'),
+    heroTotal: $('#heroTotal'),
     ribbon: $('#ribbonTrack'),
 
     heroKana: $('#heroKana'),
@@ -276,6 +290,8 @@
     ringKatakana: $('#ringKatakana'),
     hiraganaMastered: $('#hiraganaMastered'),
     katakanaMastered: $('#katakanaMastered'),
+    hiraganaTotal: $('#hiraganaTotal'),
+    katakanaTotal: $('#katakanaTotal'),
     hiraganaCore: $('#hiraganaCore'),
     katakanaCore: $('#katakanaCore'),
     hiraganaVoiced: $('#hiraganaVoiced'),
@@ -574,20 +590,20 @@
 
     colLabels.forEach((label, index) => {
       if (isYoon) {
-        html += `<span class="col-head col-head-yoon" aria-hidden="true"><span>${smallMarks[index]}</span><small>${label}</small></span>`;
+        html += `<span class="col-head col-head-yoon" lang="ja" aria-hidden="true"><span>${smallMarks[index]}</span><small>${label}</small></span>`;
       } else {
-        html += `<span class="col-head" aria-hidden="true">${label}</span>`;
+        html += `<span class="col-head" lang="ja" aria-hidden="true">${label}</span>`;
       }
     });
 
     rows.forEach((row) => {
       const rowItems = items.filter((item) => item.row === row.key).sort((a, b) => a.col - b.col);
-      html += `<span class="row-label" aria-hidden="true">${isHiragana(store.script) ? row.h : row.k}</span>`;
+      html += `<span class="row-label" lang="ja" aria-hidden="true">${isHiragana(store.script) ? row.h : row.k}</span>`;
 
       if (group === 'seion' && row.key === 'n') {
         const nItem = rowItems[0];
         html += kanaCellHTML(nItem);
-        html += `<div class="chart-note"><strong>${isHiragana(store.script) ? 'ん' : 'ン'}</strong><span>拨音 · 单独成拍，不发元音<br>读音会随前后音变化</span></div>`;
+        html += `<div class="chart-note"><strong lang="ja">${isHiragana(store.script) ? 'ん' : 'ン'}</strong><span>拨音 · 单独成拍，不发元音<br>读音会随前后音变化</span></div>`;
         return;
       }
 
@@ -633,7 +649,7 @@
     const mastered = isMastered(store.script, item.id);
     const row = rowLabelOf(item, store.script);
     return `<button class="kana-cell${mastered ? ' is-mastered' : ''}${long ? ' is-long' : ''}" type="button" data-id="${item.id}" aria-label="${char}，读音 ${item.r}，${GROUP_LABELS[item.group]}${row}${mastered ? '，已掌握' : ''}">
-      <span class="kana-char">${char}</span>
+      <span class="kana-char" lang="ja">${char}</span>
       <span class="kana-romaji">${item.r}</span>
       ${mastered ? '<span class="cell-check" aria-hidden="true">✓</span>' : ''}
     </button>`;
@@ -1157,8 +1173,8 @@
     const kataYoon = countMastered('katakana', 'yoon');
     const total = totalMastered();
 
-    setRing(el.ringHiragana, hiraCore, 46);
-    setRing(el.ringKatakana, kataCore, 46);
+    setRing(el.ringHiragana, hiraCore, SEION_TOTAL);
+    setRing(el.ringKatakana, kataCore, SEION_TOTAL);
     el.hiraganaMastered.textContent = String(hiraCore);
     el.katakanaMastered.textContent = String(kataCore);
     el.hiraganaCore.textContent = String(hiraCore);
@@ -1173,17 +1189,32 @@
     const seionTotal = countMastered('hiragana', 'seion') + countMastered('katakana', 'seion');
     const voicedTotal = hiraVoiced + kataVoiced;
     const yoonTotal = hiraYoon + kataYoon;
-    el.barSeion.style.width = `${(seionTotal / 92) * 100}%`;
-    el.barVoiced.style.width = `${(voicedTotal / 50) * 100}%`;
-    el.barYoon.style.width = `${(yoonTotal / 66) * 100}%`;
-    el.barSeionText.textContent = `${seionTotal} / 92`;
-    el.barVoicedText.textContent = `${voicedTotal} / 50`;
-    el.barYoonText.textContent = `${yoonTotal} / 66`;
+    el.barSeion.style.width = `${(seionTotal / barTotal(SEION_TOTAL)) * 100}%`;
+    el.barVoiced.style.width = `${(voicedTotal / barTotal(VOICED_TOTAL)) * 100}%`;
+    el.barYoon.style.width = `${(yoonTotal / barTotal(YOON_TOTAL)) * 100}%`;
+    el.barSeionText.textContent = `${seionTotal} / ${barTotal(SEION_TOTAL)}`;
+    el.barVoicedText.textContent = `${voicedTotal} / ${barTotal(VOICED_TOTAL)}`;
+    el.barYoonText.textContent = `${yoonTotal} / ${barTotal(YOON_TOTAL)}`;
 
     renderStats();
     renderHeatmap();
     renderReview();
     syncChartMastery();
+  }
+
+  /* 页面上所有「总数」标签（46 / 104 / 208 / 92 / 50 / 66）统一在这里由数据写入，
+     HTML 里只保留占位值。以后增删音节（比如补上现代日语常用的「ヴ」），
+     只改 data.js 就够了，不用再满文件找数字。 */
+  function syncDerivedCounts() {
+    $$('#groupTabs .group-btn').forEach((button) => {
+      const badge = $('small', button);
+      if (badge) badge.textContent = String(countInGroup(button.dataset.group));
+    });
+
+    if (el.navTotal) el.navTotal.textContent = `/ ${TOTAL_CHARS}`;
+    if (el.heroTotal) el.heroTotal.textContent = String(DATA.items.length);
+    if (el.hiraganaTotal) el.hiraganaTotal.textContent = `/ ${SEION_TOTAL}`;
+    if (el.katakanaTotal) el.katakanaTotal.textContent = `/ ${SEION_TOTAL}`;
   }
 
   function resetProgress() {
@@ -1919,6 +1950,7 @@
     renderDailyItem();
     renderDailyTasks();
     renderWriting(true);
+    syncDerivedCounts();
     refreshProgressUI();
     syncQuizChoices();
     setTip(Math.floor(Date.now() / 86400000) % DATA.tips.length);

@@ -320,11 +320,13 @@
     ]
   };
 
+  /* 只保留展示用的文案。各类音节的数量不在这里写死 ——
+     由 app.js 的 countInGroup() 从 items 推导，保持单一数据源。 */
   const groups = [
-    { id: 'seion', label: '清音', count: 46, hint: '日语最基础的 46 个音节，也是所有发音的起点。' },
-    { id: 'dakuon', label: '浊音', count: 20, hint: '在假名右上角加上「゛」，声带振动，声音更有分量。' },
-    { id: 'handakuon', label: '半浊音', count: 5, hint: '在は行右上角加上「゜」，只此一行，读作 p 音。' },
-    { id: 'yoon', label: '拗音', count: 33, hint: 'い段假名 + 小写的 ゃ / ゅ / ょ，两个假名合成一拍。' }
+    { id: 'seion', label: '清音', hint: '日语最基础的清音，也是所有发音的起点。' },
+    { id: 'dakuon', label: '浊音', hint: '在假名右上角加上「゛」，声带振动，声音更有分量。' },
+    { id: 'handakuon', label: '半浊音', hint: '在は行右上角加上「゜」，只此一行，读作 p 音。' },
+    { id: 'yoon', label: '拗音', hint: 'い段假名 + 小写的 ゃ / ゅ / ょ，两个假名合成一拍。' }
   ];
 
   const columns = {

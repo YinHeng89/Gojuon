@@ -36,15 +36,15 @@
     <span class="ambient-blob ambient-blob-one"></span>
     <span class="ambient-blob ambient-blob-two"></span>
     <span class="ambient-ring"></span>
-    <span class="ambient-vert">ことばの庭</span>
+    <span class="ambient-vert" lang="ja">ことばの庭</span>
   </div>
 
   <header class="site-header" id="siteHeader">
     <div class="nav container">
       <a class="brand" href="#top" aria-label="かなの庭，回到首页">
-        <span class="brand-seal" aria-hidden="true">あ</span>
+        <span class="brand-seal" lang="ja" aria-hidden="true">あ</span>
         <span class="brand-word">
-          <strong>かなの庭</strong>
+          <strong lang="ja">かなの庭</strong>
           <small>KANA GARDEN</small>
         </span>
       </a>
@@ -58,7 +58,7 @@
 
       <div class="nav-tools">
         <span class="nav-count" title="已掌握假名数量">
-          <span id="navCount">0</span><small>/ 208</small>
+          <span id="navCount">0</span><small id="navTotal">/ 208</small>
         </span>
         <button class="icon-button" id="themeToggle" type="button" aria-label="切换到深色模式" title="切换主题">
           <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/></svg>
@@ -98,7 +98,7 @@
           </div>
           <div class="hero-meta reveal" aria-label="学习内容概览">
             <div><strong>46</strong><span>清音</span></div>
-            <div><strong>104</strong><span>音节组合</span></div>
+            <div><strong id="heroTotal">104</strong><span>音节组合</span></div>
             <div><strong>4</strong><span>练习方式</span></div>
           </div>
         </div>
@@ -107,7 +107,7 @@
           <div class="hero-card-wrap">
             <div class="hero-card" id="heroCard">
               <div class="hero-card-top">
-                <span class="hero-card-label" id="heroRowLabel">01 / あ行 · A ROW</span>
+                <span class="hero-card-label" id="heroRowLabel" lang="ja">01 / あ行 · A ROW</span>
                 <button class="icon-button round-button hero-audio" id="heroPlay" type="button" aria-label="播放 あ 的发音">
                   <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
                 </button>
@@ -117,7 +117,7 @@
               <span class="hero-grid" aria-hidden="true"></span>
 
               <button class="hero-kana-button" id="heroKanaButton" type="button" aria-label="播放 あ 的发音">
-                <span class="hero-kana" id="heroKana">あ</span>
+                <span class="hero-kana" id="heroKana" lang="ja">あ</span>
                 <span class="hero-romaji" id="heroRomaji">a</span>
                 <span class="hero-tap-hint">轻轻一点，听它发声</span>
               </button>
@@ -125,16 +125,16 @@
               <div class="hero-vowels" id="heroVowels" role="group" aria-label="选择元音"></div>
 
               <div class="hero-card-bottom">
-                <span id="heroScriptLabel">HIRAGANA · ひらがな</span>
+                <span id="heroScriptLabel" lang="ja">HIRAGANA · ひらがな</span>
                 <span class="hero-card-index">01 — 05</span>
               </div>
 
-              <span class="hanko" aria-hidden="true"><span>かな</span><span>の庭</span></span>
+              <span class="hanko" lang="ja" aria-hidden="true"><span>かな</span><span>の庭</span></span>
             </div>
 
             <span class="floating-tag floating-tag-one" aria-hidden="true">a · i · u · e · o</span>
             <span class="floating-tag floating-tag-two" aria-hidden="true">46 SOUNDS</span>
-            <span class="vertical-note" aria-hidden="true">一音ずつ、丁寧に。</span>
+            <span class="vertical-note" lang="ja" aria-hidden="true">一音ずつ、丁寧に。</span>
           </div>
         </div>
       </div>
@@ -165,8 +165,8 @@
         <div class="chart-shell reveal">
           <div class="chart-toolbar">
             <div class="segmented script-switch" role="group" aria-label="选择假名种类">
-              <button class="script-btn is-active" type="button" data-script="hiragana" aria-pressed="true">平假名 <em>あ</em></button>
-              <button class="script-btn" type="button" data-script="katakana" aria-pressed="false">片假名 <em>ア</em></button>
+              <button class="script-btn is-active" type="button" data-script="hiragana" aria-pressed="true">平假名 <em lang="ja">あ</em></button>
+              <button class="script-btn" type="button" data-script="katakana" aria-pressed="false">片假名 <em lang="ja">ア</em></button>
             </div>
 
             <div class="group-tabs" id="groupTabs" role="group" aria-label="选择音类">
@@ -319,13 +319,13 @@
               </div>
               <div class="daily-kana-wrap">
                 <button class="daily-kana" id="dailyKanaButton" type="button" aria-label="播放今日一音">
-                  <span id="dailyKana">あ</span>
+                  <span id="dailyKana" lang="ja">あ</span>
                   <span class="daily-audio">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
                   </span>
                 </button>
                 <div class="daily-word">
-                  <strong id="dailyWordKana">あめ</strong>
+                  <strong id="dailyWordKana" lang="ja">あめ</strong>
                   <span id="dailyWordMeaning">雨</span>
                 </div>
               </div>
@@ -379,7 +379,7 @@
 
             <div class="writing-current">
               <div class="writing-current-kana">
-                <span id="writingKana">あ</span>
+                <span id="writingKana" lang="ja">あ</span>
                 <span id="writingRomaji">a</span>
               </div>
               <div class="writing-index"><strong id="writingIndex">01</strong><span>/ 104</span></div>
@@ -387,8 +387,8 @@
 
             <div class="writing-controls-row">
               <div class="writing-script" role="group" aria-label="选择假名种类">
-                <button class="script-btn is-active" type="button" data-script="hiragana" aria-pressed="true">あ</button>
-                <button class="script-btn" type="button" data-script="katakana" aria-pressed="false">ア</button>
+                <button class="script-btn is-active" type="button" data-script="hiragana" aria-pressed="true" lang="ja">あ</button>
+                <button class="script-btn" type="button" data-script="katakana" aria-pressed="false" lang="ja">ア</button>
               </div>
               <div class="writing-nav">
                 <button class="icon-button square-button" id="writingPrev" type="button" aria-label="上一个假名">
@@ -404,9 +404,9 @@
 
           <div class="writing-stage">
             <div class="writing-paper" id="writingPaper">
-              <span class="writing-guide" id="writingGuide" aria-hidden="true">あ</span>
+              <span class="writing-guide" id="writingGuide" lang="ja" aria-hidden="true">あ</span>
               <canvas id="writingCanvas" aria-label="书写练习画布，用鼠标或手指描摹当前假名"></canvas>
-              <span class="writing-stamp" aria-hidden="true">かな<br>の庭</span>
+              <span class="writing-stamp" lang="ja" aria-hidden="true">かな<br>の庭</span>
             </div>
 
             <div class="writing-toolbar">
@@ -472,9 +472,9 @@
                     <circle class="ring-track" cx="60" cy="60" r="52"></circle>
                     <circle class="ring-value ring-hiragana" id="ringHiragana" cx="60" cy="60" r="52"></circle>
                   </svg>
-                  <div class="ring-label"><strong id="hiraganaMastered">0</strong><span>/ 46</span></div>
+                  <div class="ring-label"><strong id="hiraganaMastered">0</strong><span id="hiraganaTotal">/ 46</span></div>
                 </div>
-                <h4>平假名 <small>ひらがな</small></h4>
+                <h4>平假名 <small lang="ja">ひらがな</small></h4>
                 <p class="ring-sub">清音掌握 · <span id="hiraganaCore">0</span> / 46</p>
                 <p class="ring-mini">浊音·半浊 <span id="hiraganaVoiced">0</span>/25 · 拗音 <span id="hiraganaYoon">0</span>/33</p>
               </div>
@@ -485,9 +485,9 @@
                     <circle class="ring-track" cx="60" cy="60" r="52"></circle>
                     <circle class="ring-value ring-katakana" id="ringKatakana" cx="60" cy="60" r="52"></circle>
                   </svg>
-                  <div class="ring-label"><strong id="katakanaMastered">0</strong><span>/ 46</span></div>
+                  <div class="ring-label"><strong id="katakanaMastered">0</strong><span id="katakanaTotal">/ 46</span></div>
                 </div>
-                <h4>片假名 <small>カタカナ</small></h4>
+                <h4>片假名 <small lang="ja">カタカナ</small></h4>
                 <p class="ring-sub">清音掌握 · <span id="katakanaCore">0</span> / 46</p>
                 <p class="ring-mini">浊音·半浊 <span id="katakanaVoiced">0</span>/25 · 拗音 <span id="katakanaYoon">0</span>/33</p>
               </div>
@@ -561,15 +561,15 @@
     <div class="container">
       <div class="footer-top">
         <a class="brand brand-footer" href="#top" aria-label="かなの庭，回到顶部">
-          <span class="brand-seal" aria-hidden="true">あ</span>
-          <span class="brand-word"><strong>かなの庭</strong><small>KANA GARDEN</small></span>
+          <span class="brand-seal" lang="ja" aria-hidden="true">あ</span>
+          <span class="brand-word"><strong lang="ja">かなの庭</strong><small>KANA GARDEN</small></span>
         </a>
         <p class="footer-quote">五十音，是日语的第一扇门。<br>愿你在自己的节奏里，慢慢走进去。</p>
         <a class="back-top" href="#top">回到顶部 <span>↑</span></a>
       </div>
-      <div class="footer-kana" aria-hidden="true">あいうえおかきくけこさしすせそたちつてとなにぬねの</div>
+      <div class="footer-kana" lang="ja" aria-hidden="true">あいうえおかきくけこさしすせそたちつてとなにぬねの</div>
       <div class="footer-bottom">
-        <span>© 2026 かなの庭</span>
+        <span lang="ja">© 2026 かなの庭</span>
         <span>所有学习进度仅保存在你的浏览器</span>
         <span>Made for slow learners</span>
       </div>
@@ -577,10 +577,10 @@
   </footer>
 
   <nav class="mobile-dock" aria-label="移动端导航">
-    <a href="#chart" data-nav="chart"><i>あ</i><span>音图</span></a>
-    <a href="#practice" data-nav="practice"><i>聞</i><span>练习</span></a>
-    <a href="#write" data-nav="write"><i>書</i><span>书写</span></a>
-    <a href="#progress" data-nav="progress"><i>歩</i><span>足迹</span></a>
+    <a href="#chart" data-nav="chart"><i lang="ja">あ</i><span>音图</span></a>
+    <a href="#practice" data-nav="practice"><i lang="ja">聞</i><span>练习</span></a>
+    <a href="#write" data-nav="write"><i lang="ja">書</i><span>书写</span></a>
+    <a href="#progress" data-nav="progress"><i lang="ja">歩</i><span>足迹</span></a>
   </nav>
 
   <!-- 假名详情 -->
@@ -588,25 +588,25 @@
     <div class="dialog-shell">
       <div class="dialog-visual">
         <div class="dialog-visual-top">
-          <span id="dialogGroup">清音 · あ行</span>
+          <span id="dialogGroup" lang="ja">清音 · あ行</span>
           <button class="icon-button round-button dialog-close" id="dialogClose" type="button" aria-label="关闭详情">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
           </button>
         </div>
         <span class="dialog-sun" aria-hidden="true"></span>
-        <span class="dialog-kana" id="dialogKana">あ</span>
+        <span class="dialog-kana" id="dialogKana" lang="ja">あ</span>
         <span class="dialog-romaji" id="dialogRomaji">a</span>
         <button class="dialog-play" id="dialogPlay" type="button">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
           听一听
         </button>
-        <span class="dialog-counterpart" id="dialogCounterpart">ア</span>
-        <span class="dialog-hanko" aria-hidden="true">かなの庭</span>
+        <span class="dialog-counterpart" id="dialogCounterpart" lang="ja">ア</span>
+        <span class="dialog-hanko" lang="ja" aria-hidden="true">かなの庭</span>
       </div>
 
       <div class="dialog-content">
-        <p class="dialog-kicker" id="dialogKicker">SEION · あ行</p>
-        <h2 class="dialog-title" id="dialogTitle">あ <span>a</span></h2>
+        <p class="dialog-kicker" id="dialogKicker" lang="ja">SEION · あ行</p>
+        <h2 class="dialog-title" id="dialogTitle" lang="ja">あ <span>a</span></h2>
         <p class="dialog-note" id="dialogNote"></p>
 
         <div class="dialog-word" id="dialogWord">
@@ -617,7 +617,7 @@
             </button>
           </div>
           <div class="dialog-word-main">
-            <strong id="dialogWordKana">あめ</strong>
+            <strong id="dialogWordKana" lang="ja">あめ</strong>
             <span id="dialogWordKanji">雨</span>
           </div>
           <p id="dialogWordMeaning">雨</p>
