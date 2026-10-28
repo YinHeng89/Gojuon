@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="かなの庭 —— 一座安静好看的五十音小庭院。跟读平假名与片假名，听音、认读、书写并记录学习进度。">
+  <meta name="theme-color" content="#f4efe4" id="themeColor">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="かなの庭 · 五十音学习">
+  <meta property="og:description" content="从一声「あ」开始。听、读、写、练，在自己的节奏里认识日语的第一扇门。">
+  <meta property="og:image" content="preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>かなの庭 · 五十音学习</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('kanaGarden.theme');
+        var theme = (saved === 'dark' || saved === 'light')
+          ? saved
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.classList.add('js');
+      } catch (error) { /* localStorage 不可用时保持浅色 */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/data.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient-blob ambient-blob-one"></span>
+    <span class="ambient-blob ambient-blob-two"></span>
+    <span class="ambient-ring"></span>
+    <span class="ambient-vert">ことばの庭</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="nav container">
+      <a class="brand" href="#top" aria-label="かなの庭，回到首页">
+        <span class="brand-seal" aria-hidden="true">あ</span>
+        <span class="brand-word">
+          <strong>かなの庭</strong>
+          <small>KANA GARDEN</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#chart" data-nav="chart"><span>01</span>五十音图</a>
+        <a href="#practice" data-nav="practice"><span>02</span>听读练习</a>
+        <a href="#write" data-nav="write"><span>03</span>书写练习</a>
+        <a href="#progress" data-nav="progress"><span>04</span>学习足迹</a>
+      </nav>
+
+      <div class="nav-tools">
+        <span class="nav-count" title="已掌握假名数量">
+          <span id="navCount">0</span><small>/ 208</small>
+        </span>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="切换到深色模式" title="切换主题">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/></svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ── Hero ─────────────────────────────────────── -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">
+            <span class="eyebrow-line"></span>
+            はじめまして · 初次见面
+          </p>
+          <h1 class="hero-title reveal" id="heroTitle">
+            把五十音，<br>
+            <span class="hero-title-soft">读成一首</span><br>
+            <span class="accent-word">温柔的歌。<svg class="title-underline" viewBox="0 0 280 18" preserveAspectRatio="none" aria-hidden="true"><path d="M2 13C52 4 142 2 278 8"/></svg></span>
+          </h1>
+          <p class="hero-lede reveal">
+            从一声「あ」开始。听、读、写、练，在自己的节奏里，
+            认识日语的第一扇门。不必急着走远，先把每个音读好。
+          </p>
+          <div class="hero-actions reveal">
+            <a class="button button-primary" href="#chart">
+              翻开五十音图
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="button button-ghost" href="#practice">
+              试一次小测
+              <span class="button-mark">↗</span>
+            </a>
+          </div>
+          <div class="hero-meta reveal" aria-label="学习内容概览">
+            <div><strong>46</strong><span>清音</span></div>
+            <div><strong>104</strong><span>音节组合</span></div>
+            <div><strong>4</strong><span>练习方式</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-card-wrap">
+            <div class="hero-card" id="heroCard">
+              <div class="hero-card-top">
+                <span class="hero-card-label" id="heroRowLabel">01 / あ行 · A ROW</span>
+                <button class="icon-button round-button hero-audio" id="heroPlay" type="button" aria-label="播放 あ 的发音">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
+                </button>
+              </div>
+
+              <span class="hero-sun" aria-hidden="true"></span>
+              <span class="hero-grid" aria-hidden="true"></span>
+
+              <button class="hero-kana-button" id="heroKanaButton" type="button" aria-label="播放 あ 的发音">
+                <span class="hero-kana" id="heroKana">あ</span>
+                <span class="hero-romaji" id="heroRomaji">a</span>
+                <span class="hero-tap-hint">轻轻一点，听它发声</span>
+              </button>
+
+              <div class="hero-vowels" id="heroVowels" role="group" aria-label="选择元音"></div>
+
+              <div class="hero-card-bottom">
+                <span id="heroScriptLabel">HIRAGANA · ひらがな</span>
+                <span class="hero-card-index">01 — 05</span>
+              </div>
+
+              <span class="hanko" aria-hidden="true"><span>かな</span><span>の庭</span></span>
+            </div>
+
+            <span class="floating-tag floating-tag-one" aria-hidden="true">a · i · u · e · o</span>
+            <span class="floating-tag floating-tag-two" aria-hidden="true">46 SOUNDS</span>
+            <span class="vertical-note" aria-hidden="true">一音ずつ、丁寧に。</span>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#chart" aria-label="向下浏览">
+        <span>SCROLL</span>
+        <i></i>
+      </a>
+    </section>
+
+    <div class="kana-ribbon" aria-hidden="true">
+      <div class="ribbon-track" id="ribbonTrack"></div>
+    </div>
+
+    <!-- ── 五十音图 ─────────────────────────────────── -->
+    <section class="section chart-section" id="chart" aria-labelledby="chartTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="section-kicker"><span>01</span>五十音图 <em>/ GOJŪON</em></p>
+            <h2 id="chartTitle">一张图，<br>装下日语的第一声。</h2>
+          </div>
+          <div class="section-side">
+            <p>选择平假名或片假名，点击任意假名听发音、看例词。答对或手动标记后，它会住进你的掌握里。</p>
+            <span class="section-note"><i></i>点击假名 · 听见发音</span>
+          </div>
+        </header>
+
+        <div class="chart-shell reveal">
+          <div class="chart-toolbar">
+            <div class="segmented script-switch" role="group" aria-label="选择假名种类">
+              <button class="script-btn is-active" type="button" data-script="hiragana" aria-pressed="true">平假名 <em>あ</em></button>
+              <button class="script-btn" type="button" data-script="katakana" aria-pressed="false">片假名 <em>ア</em></button>
+            </div>
+
+            <div class="group-tabs" id="groupTabs" role="group" aria-label="选择音类">
+              <button class="group-btn is-active" type="button" data-group="seion" aria-pressed="true">清音<small>46</small></button>
+              <button class="group-btn" type="button" data-group="dakuon" aria-pressed="false">浊音<small>20</small></button>
+              <button class="group-btn" type="button" data-group="handakuon" aria-pressed="false">半浊音<small>5</small></button>
+              <button class="group-btn" type="button" data-group="yoon" aria-pressed="false">拗音<small>33</small></button>
+            </div>
+
+            <div class="toolbar-end">
+              <label class="switch-label" for="romajiToggle">
+                <input type="checkbox" id="romajiToggle" checked>
+                <span class="switch-track" aria-hidden="true"><i></i></span>
+                <span>罗马音</span>
+              </label>
+              <button class="mini-button" id="randomKana" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+                随机听音
+              </button>
+            </div>
+          </div>
+
+          <div class="chart-subbar">
+            <p id="chartHint">日语最基础的 46 个音节，也是所有发音的起点。</p>
+            <p class="chart-progress"><span id="chartMastered">0</span><span class="chart-progress-sep">/</span><span id="chartTotal">46</span> 已掌握</p>
+          </div>
+
+          <div class="chart-grid" id="kanaChart" role="grid" aria-label="五十音图"></div>
+
+          <div class="chart-footer">
+            <p><span class="legend-dot"></span>已掌握</p>
+            <p>点击任意假名查看例词与发音 · 支持 Tab 键逐格浏览</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 听读练习 ─────────────────────────────────── -->
+    <section class="section practice-section" id="practice" aria-labelledby="practiceTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="section-kicker"><span>02</span>小试身手 <em>/ KANA QUIZ</em></p>
+            <h2 id="practiceTitle">听一遍，认一遍，<br>让假名变成直觉。</h2>
+          </div>
+          <div class="section-side">
+            <p>一轮 10 道小题，没有倒计时，也不怕答错。这里只和昨天的自己比。答对的假名会直接收入掌握。</p>
+            <span class="section-note"><i></i>按 1–4 快速作答</span>
+          </div>
+        </header>
+
+        <div class="practice-grid">
+          <div class="quiz-card reveal" id="quizCard">
+            <div class="quiz-head">
+              <span class="quiz-brand"><i>?</i> KANA QUIZ</span>
+              <span class="best-chip">最佳 <strong id="bestScore">0</strong><small>/ 10</small></span>
+            </div>
+
+            <div class="quiz-panel quiz-intro" id="quizIntro">
+              <div class="quiz-intro-copy">
+                <p class="quiz-overline">一問一答</p>
+                <h3 id="quizIntroTitle">看字，<br>认出它的读音。</h3>
+                <p>选好玩法与范围，看看这十个假名里，你能认出几个。</p>
+              </div>
+
+              <div class="quiz-settings">
+                <div class="setting-group">
+                  <span class="setting-label">玩法</span>
+                  <div class="choice-row" id="quizModes" role="group" aria-label="选择题型">
+                    <button class="choice is-active" type="button" data-mode="read" aria-pressed="true">看字选音</button>
+                    <button class="choice" type="button" data-mode="listen" aria-pressed="false">听音选字</button>
+                  </div>
+                </div>
+                <div class="setting-group">
+                  <span class="setting-label">范围</span>
+                  <div class="choice-row choice-row-small" id="quizRanges" role="group" aria-label="选择题型范围">
+                    <button class="choice is-active" type="button" data-range="seion" aria-pressed="true">清音</button>
+                    <button class="choice" type="button" data-range="voiced" aria-pressed="false">浊音 · 半浊</button>
+                    <button class="choice" type="button" data-range="yoon" aria-pressed="false">拗音</button>
+                    <button class="choice" type="button" data-range="all" aria-pressed="false">全部</button>
+                  </div>
+                </div>
+                <div class="quiz-start-row">
+                  <button class="button button-primary" id="startQuiz" type="button">
+                    开始 10 题
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                  <span>选错也没关系</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="quiz-panel quiz-game" id="quizGame" hidden>
+              <div class="quiz-status">
+                <span id="quizCounter">第 1 / 10 题</span>
+                <span class="quiz-scoreline">
+                  <span>得分 <strong id="quizScore">0</strong></span>
+                  <span>连击 <strong id="quizStreak">0</strong></span>
+                  <button class="quiz-exit" id="quizExit" type="button">退出本轮</button>
+                </span>
+              </div>
+              <div class="quiz-progress"><span id="quizProgressBar"></span></div>
+
+              <div class="quiz-question">
+                <div class="quiz-question-meta">
+                  <span id="quizModeLabel">看字选音</span>
+                  <span id="quizRangeLabel">清音</span>
+                </div>
+                <p class="quiz-prompt" id="quizPrompt" tabindex="-1">这个假名怎么读？</p>
+                <div class="quiz-display" id="quizDisplay" aria-live="polite" aria-atomic="true"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+                <button class="quiz-next" id="quizNext" type="button" hidden>
+                  下一题
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-panel quiz-result" id="quizResult" hidden>
+              <div class="result-top">
+                <div class="result-ring" id="resultRing" style="--score: 0">
+                  <div class="result-ring-inner">
+                    <strong id="resultScore">0</strong>
+                    <span>/ 10</span>
+                  </div>
+                </div>
+                <div class="result-copy">
+                  <p class="quiz-overline">本轮完成</p>
+                  <h3 id="resultTitle" tabindex="-1">慢慢来，也很好。</h3>
+                  <p id="resultMessage">每一道题，都在把假名变熟悉。</p>
+                </div>
+              </div>
+              <div class="result-actions">
+                <button class="button button-light" id="quizAgain" type="button">再来一轮</button>
+                <button class="text-button text-button-light" id="quizReset" type="button">调整设置</button>
+              </div>
+              <div class="result-missed">
+                <p class="result-label">这一轮可以再看一眼</p>
+                <div class="result-missed-list" id="resultMissedList"></div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="practice-side">
+            <div class="side-card daily-card reveal">
+              <div class="side-card-head">
+                <span>今日一音</span>
+                <span id="dailyDate">10 / 28</span>
+              </div>
+              <div class="daily-kana-wrap">
+                <button class="daily-kana" id="dailyKanaButton" type="button" aria-label="播放今日一音">
+                  <span id="dailyKana">あ</span>
+                  <span class="daily-audio">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
+                  </span>
+                </button>
+                <div class="daily-word">
+                  <strong id="dailyWordKana">あめ</strong>
+                  <span id="dailyWordMeaning">雨</span>
+                </div>
+              </div>
+              <div class="daily-tasks-head">
+                <span>今天的三件小事</span>
+                <span id="dailyTaskCount">0 / 3</span>
+              </div>
+              <ul class="daily-task-list">
+                <li class="daily-task" data-task="listen"><i></i><span>听一个假名</span><b>✓</b></li>
+                <li class="daily-task" data-task="write"><i></i><span>写一个字</span><b>✓</b></li>
+                <li class="daily-task" data-task="quiz"><i></i><span>完成一轮小测</span><b>✓</b></li>
+              </ul>
+            </div>
+
+            <div class="side-card tip-card reveal">
+              <div class="side-card-head">
+                <span>发音笔记</span>
+                <span>NOTE</span>
+              </div>
+              <span class="tip-quote" aria-hidden="true">「</span>
+              <p class="tip-text" id="tipText">「し」读作 shi，不是 si。嘴唇放松，像轻轻送出一口气。</p>
+              <button class="text-button" id="nextTip" type="button">
+                换一条
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 书写练习 ─────────────────────────────────── -->
+    <section class="section writing-section" id="write" aria-labelledby="writeTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="section-kicker"><span>03</span>一筆一画 <em>/ SHODŌ</em></p>
+            <h2 id="writeTitle">把假名，<br>写成自己的笔迹。</h2>
+          </div>
+          <div class="section-side">
+            <p>跟着浅色的字形描一遍。不必追求完美，先让手记住笔画的方向，再让耳朵记住它的声音。</p>
+            <span class="section-note"><i></i>支持鼠标 · 触控 · 手写笔</span>
+          </div>
+        </header>
+
+        <div class="writing-shell reveal">
+          <div class="writing-copy">
+            <p class="writing-overline">一音 · 一字</p>
+            <h3>静下来，<br>写一个字。</h3>
+            <p class="writing-description">描摹不是复制，而是和这个音多待一会儿。</p>
+
+            <div class="writing-current">
+              <div class="writing-current-kana">
+                <span id="writingKana">あ</span>
+                <span id="writingRomaji">a</span>
+              </div>
+              <div class="writing-index"><strong id="writingIndex">01</strong><span>/ 104</span></div>
+            </div>
+
+            <div class="writing-controls-row">
+              <div class="writing-script" role="group" aria-label="选择假名种类">
+                <button class="script-btn is-active" type="button" data-script="hiragana" aria-pressed="true">あ</button>
+                <button class="script-btn" type="button" data-script="katakana" aria-pressed="false">ア</button>
+              </div>
+              <div class="writing-nav">
+                <button class="icon-button square-button" id="writingPrev" type="button" aria-label="上一个假名">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="text-button" id="writingRandom" type="button">换一字</button>
+                <button class="icon-button square-button" id="writingNext" type="button" aria-label="下一个假名">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="writing-stage">
+            <div class="writing-paper" id="writingPaper">
+              <span class="writing-guide" id="writingGuide" aria-hidden="true">あ</span>
+              <canvas id="writingCanvas" aria-label="书写练习画布，用鼠标或手指描摹当前假名"></canvas>
+              <span class="writing-stamp" aria-hidden="true">かな<br>の庭</span>
+            </div>
+
+            <div class="writing-toolbar">
+              <div>
+                <button class="tool-button" id="undoStroke" type="button">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7 4 12l5 5M4 12h9a6 6 0 0 1 6 6"/></svg>
+                  撤销
+                </button>
+                <button class="tool-button" id="clearCanvas" type="button">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13"/></svg>
+                  清空
+                </button>
+                <button class="tool-button" id="toggleGuide" type="button" aria-pressed="true">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 12h16M12 5v14"/></svg>
+                  字帖
+                </button>
+              </div>
+              <div>
+                <button class="tool-button" id="playWriting" type="button">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+                  听发音
+                </button>
+                <button class="tool-button tool-button-strong" id="saveWriting" type="button">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                  保存字帖
+                </button>
+              </div>
+            </div>
+            <p class="writing-hint">在格子里慢慢描，写错了可以撤销，也可以清空重来。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 学习足迹 ─────────────────────────────────── -->
+    <section class="section progress-section" id="progress" aria-labelledby="progressTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="section-kicker"><span>04</span>学习足迹 <em>/ YOUR PACE</em></p>
+            <h2 id="progressTitle">每一次开口，<br>都算数。</h2>
+          </div>
+          <div class="section-side">
+            <p>进度只保存在这台设备的浏览器里，不需要登录。隔天回来，它还会安静地待在这里。</p>
+            <span class="section-note"><i></i>本地保存 · 不上传</span>
+          </div>
+        </header>
+
+        <div class="progress-grid">
+          <div class="progress-card mastery-card reveal">
+            <div class="card-heading">
+              <div>
+                <p class="card-kicker">掌握地图</p>
+                <h3>两种假名，<br>各自生长。</h3>
+              </div>
+              <span class="small-note" id="overallMastery">0 / 208</span>
+            </div>
+
+            <div class="mastery-rings">
+              <div class="ring-block">
+                <div class="ring-wrap">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+                    <circle class="ring-value ring-hiragana" id="ringHiragana" cx="60" cy="60" r="52"></circle>
+                  </svg>
+                  <div class="ring-label"><strong id="hiraganaMastered">0</strong><span>/ 46</span></div>
+                </div>
+                <h4>平假名 <small>ひらがな</small></h4>
+                <p class="ring-sub">清音掌握 · <span id="hiraganaCore">0</span> / 46</p>
+                <p class="ring-mini">浊音·半浊 <span id="hiraganaVoiced">0</span>/25 · 拗音 <span id="hiraganaYoon">0</span>/33</p>
+              </div>
+
+              <div class="ring-block">
+                <div class="ring-wrap">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+                    <circle class="ring-value ring-katakana" id="ringKatakana" cx="60" cy="60" r="52"></circle>
+                  </svg>
+                  <div class="ring-label"><strong id="katakanaMastered">0</strong><span>/ 46</span></div>
+                </div>
+                <h4>片假名 <small>カタカナ</small></h4>
+                <p class="ring-sub">清音掌握 · <span id="katakanaCore">0</span> / 46</p>
+                <p class="ring-mini">浊音·半浊 <span id="katakanaVoiced">0</span>/25 · 拗音 <span id="katakanaYoon">0</span>/33</p>
+              </div>
+            </div>
+
+            <div class="group-progress" aria-label="全部假名分类掌握度">
+              <div class="group-bar">
+                <span>清音</span>
+                <div class="bar-track"><i id="barSeion"></i></div>
+                <em id="barSeionText">0 / 92</em>
+              </div>
+              <div class="group-bar">
+                <span>浊音·半浊</span>
+                <div class="bar-track"><i id="barVoiced"></i></div>
+                <em id="barVoicedText">0 / 50</em>
+              </div>
+              <div class="group-bar">
+                <span>拗音</span>
+                <div class="bar-track"><i id="barYoon"></i></div>
+                <em id="barYoonText">0 / 66</em>
+              </div>
+            </div>
+
+            <p class="mastery-quote">「一音一音地读，一日一日地靠近。」</p>
+          </div>
+
+          <div class="progress-card stats-card reveal">
+            <div class="card-heading">
+              <div>
+                <p class="card-kicker">学习数据</p>
+                <h3>慢慢来，<br>也算数。</h3>
+              </div>
+              <span class="small-note"><i class="live-dot"></i>本地保存</span>
+            </div>
+
+            <div class="stat-grid">
+              <div class="stat"><strong id="statStreak">0</strong><span>连续学习 / 天</span></div>
+              <div class="stat"><strong id="statBestStreak">0</strong><span>最佳连击</span></div>
+              <div class="stat"><strong id="statAnswered">0</strong><span>累计作答</span></div>
+              <div class="stat"><strong id="statMastered">0</strong><span>掌握假名</span></div>
+            </div>
+
+            <div class="heatmap-block">
+              <div class="heatmap-head">
+                <span>最近 28 天</span>
+                <div class="heatmap-legend" aria-hidden="true"><span>少</span><i class="level-0"></i><i class="level-1"></i><i class="level-2"></i><i class="level-3"></i><span>多</span></div>
+              </div>
+              <div class="heatmap" id="heatmap" role="img" aria-label="最近 28 天学习活动"></div>
+            </div>
+          </div>
+
+          <div class="progress-card review-card reveal">
+            <div class="card-heading">
+              <div>
+                <p class="card-kicker">需要再看一眼</p>
+                <h3>错题会<br>慢慢变少。</h3>
+              </div>
+              <span class="small-note" id="reviewCount">0 个</span>
+            </div>
+
+            <div class="review-list" id="reviewList"></div>
+            <p class="review-note">答对同一个假名后，它会自动从错题里移出。</p>
+            <button class="reset-button" id="resetProgress" type="button">重置全部学习进度</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a class="brand brand-footer" href="#top" aria-label="かなの庭，回到顶部">
+          <span class="brand-seal" aria-hidden="true">あ</span>
+          <span class="brand-word"><strong>かなの庭</strong><small>KANA GARDEN</small></span>
+        </a>
+        <p class="footer-quote">五十音，是日语的第一扇门。<br>愿你在自己的节奏里，慢慢走进去。</p>
+        <a class="back-top" href="#top">回到顶部 <span>↑</span></a>
+      </div>
+      <div class="footer-kana" aria-hidden="true">あいうえおかきくけこさしすせそたちつてとなにぬねの</div>
+      <div class="footer-bottom">
+        <span>© 2026 かなの庭</span>
+        <span>所有学习进度仅保存在你的浏览器</span>
+        <span>Made for slow learners</span>
+      </div>
+    </div>
+  </footer>
+
+  <nav class="mobile-dock" aria-label="移动端导航">
+    <a href="#chart" data-nav="chart"><i>あ</i><span>音图</span></a>
+    <a href="#practice" data-nav="practice"><i>聞</i><span>练习</span></a>
+    <a href="#write" data-nav="write"><i>書</i><span>书写</span></a>
+    <a href="#progress" data-nav="progress"><i>歩</i><span>足迹</span></a>
+  </nav>
+
+  <!-- 假名详情 -->
+  <dialog class="kana-dialog" id="kanaDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-shell">
+      <div class="dialog-visual">
+        <div class="dialog-visual-top">
+          <span id="dialogGroup">清音 · あ行</span>
+          <button class="icon-button round-button dialog-close" id="dialogClose" type="button" aria-label="关闭详情">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <span class="dialog-sun" aria-hidden="true"></span>
+        <span class="dialog-kana" id="dialogKana">あ</span>
+        <span class="dialog-romaji" id="dialogRomaji">a</span>
+        <button class="dialog-play" id="dialogPlay" type="button">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
+          听一听
+        </button>
+        <span class="dialog-counterpart" id="dialogCounterpart">ア</span>
+        <span class="dialog-hanko" aria-hidden="true">かなの庭</span>
+      </div>
+
+      <div class="dialog-content">
+        <p class="dialog-kicker" id="dialogKicker">SEION · あ行</p>
+        <h2 class="dialog-title" id="dialogTitle">あ <span>a</span></h2>
+        <p class="dialog-note" id="dialogNote"></p>
+
+        <div class="dialog-word" id="dialogWord">
+          <div class="dialog-word-head">
+            <span>例词</span>
+            <button class="icon-button mini-icon-button" id="dialogWordPlay" type="button" aria-label="播放例词">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+            </button>
+          </div>
+          <div class="dialog-word-main">
+            <strong id="dialogWordKana">あめ</strong>
+            <span id="dialogWordKanji">雨</span>
+          </div>
+          <p id="dialogWordMeaning">雨</p>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="button button-primary" id="dialogMaster" type="button">标记为已掌握</button>
+          <button class="button button-ghost" id="dialogWrite" type="button">去书写 <span>→</span></button>
+        </div>
+        <p class="dialog-footnote">发音由本地语音合成生成 · 学习进度保存在当前浏览器</p>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <noscript>
+    <div class="noscript-note">请开启 JavaScript，才能使用发音、测验与学习记录功能。</div>
+  </noscript>
+</body>
+</html>
